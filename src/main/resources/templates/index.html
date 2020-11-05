@@ -15,42 +15,29 @@
     <div id="header">
         <div class="logo"><b>Logic Gates Simulator</b></div>
         <div class="headerNavigation">
-            <a href="/" class="w3-bar-item w3-button">Playground</a>
+            <a href="/" class="w3-bar-item w3-button">Main</a>
             <a href="/help" class="w3-bar-item w3-button">Help</a>
         </div>
     </div>
-    <div id="components">
-        <div class="w3-container w3-dark-gray w3-center"><h2>Inputs</h2></div>
-        <div class="w3-row-padding">
-            <div class="w3-col s6"><p class="w3-center">1</p></div>
-            <div class="w3-col s6"><p class="w3-center">0</p></div>
-        </div>
+    <form action="/result" method="post" style="height: 90%">
+        <div id="dataIO">
+            <div class="w3-container w3-dark-gray w3-center"><h3>Inputs</h3></div>
+            <div class="w3-container" style="min-height: 30px">
 
-        <div class="w3-container w3-dark-gray w3-center w3-margin-top"><h2>Logic Gates</h2></div>
-        <div class="w3-row-padding">
-            <div class="w3-col s6"><p class="w3-center">AND</p></div>
-            <div class="w3-col s6"><p class="w3-center">NAND</p></div>
-        </div>
-        <div class="w3-row-padding">
-            <div class="w3-col s6"><p class="w3-center">OR</p></div>
-            <div class="w3-col s6"><p class="w3-center">NOR</p></div>
-        </div>
-        <div class="w3-row-padding">
-            <div class="w3-col s6"><p class="w3-center">XOR</p></div>
-            <div class="w3-col s6"><p class="w3-center">XNOR</p></div>
-        </div>
-        <div class="w3-row-padding">
-            <div class="w3-col s12"><p class="w3-center">NOT</p></div>
-        </div>
+            </div>
 
-        <div class="w3-container w3-dark-gray w3-center w3-margin-top"><h2>Output</h2></div>
-        <div class="w3-row-padding">
-            <div class="w3-col s12"><p class="w3-center">LED</p></div>
-        </div>
-    </div>
-    <div id="content">
+            <div class="w3-container w3-dark-gray w3-center"><h3>Output</h3></div>
+            <div class="w3-container" style="min-height: 30px">
 
-    </div>
+            </div>
+        </div>
+        <div id="content">
+            <label class="w3-text-blue">Formula</label>
+            <input class="w3-input w3-border" type="text" placeholder="Y = A & B">
+            <br>
+            <button class="w3-btn w3-blue">Calculate</button>
+        </div>
+    </form>
     <div id="footer">© 2019-2020, Volodymyr Sakharov</div>
 </body>
 </html>

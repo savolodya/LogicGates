@@ -3,7 +3,7 @@ html, body {
     margin: 0;
     background-color: #f4f4f4;
     font-family: Verdana, sans-serif;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 p {
@@ -32,31 +32,23 @@ a {
     text-align: center;
 }
 
-#components {
+#dataIO {
     float: left;
     width: 350px;
-    margin-top: 10px;
     margin-bottom: 10px;
     background-color: white;
-}
-
-.headerComponents {
-    font-size: 25px;
-    background-color: darkgray;
-    text-align: center;
+    height: 100%;
 }
 
 #content {
-    margin-left: 360px;
-    margin-top: 10px;
+    margin: 10px 0px 10px 360px;
     padding: 10px;
     background-color: white;
-    height: 90%;
+    height: 100%;
 }
 
 #footer {
     clear: both;
-    margin-top: 10px;
     padding: 10px;
     text-align: center;
     background-color: #3c8dbc;
