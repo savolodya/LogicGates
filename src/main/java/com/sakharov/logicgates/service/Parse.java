@@ -37,11 +37,11 @@ public class Parse implements Parser {
         for (char c: resultList)
             result.append(c);
 
-        return result.toString();
+        return result.reverse().toString();
     }
 
     private boolean isNumber(char token) {
-        return Character.isLetter(token) || token == '!';
+        return Character.isLetter(token);
     }
 
     private int getPriority(char op) {
@@ -49,8 +49,11 @@ public class Parse implements Parser {
             return 0;
         } else if (op == '|') {
             return 1;
-        } else {
+        } else if (op == '&') {
             return 2;
-        }
+        } else if (op == '!') {
+            return 3;
+        } else
+            return 4;
     }
 }
