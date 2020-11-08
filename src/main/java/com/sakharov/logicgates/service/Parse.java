@@ -11,28 +11,28 @@ public class Parse implements Parser {
     public String rpn(String formula) {
         StringBuilder result = new StringBuilder();
         ArrayList<Character> resultList = new ArrayList<>();
-
         Stack<Character> opStack = new Stack<>();
+
+        formula = prepare(formula);
+
         for (char token : formula.toCharArray()) {
-            if (isNumber(token)) {
+            if (isLetter(token))
                 resultList.add(token);
-            } else if (token == '(') {
+            else if (token == '(')
                 opStack.push(token);
-            } else if (token == ')') {
-                while (opStack.peek() != '(') {
+            else if (token == ')') {
+                while (opStack.peek() != '(')
                     resultList.add(opStack.pop());
-                }
                 opStack.pop();
             } else {
-                while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token)) {
+                while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token))
                     resultList.add(opStack.pop());
-                }
                 opStack.push(token);
             }
         }
-        while (!opStack.isEmpty()) {
+
+        while (!opStack.isEmpty())
             resultList.add(opStack.pop());
-        }
 
         for (char c: resultList)
             result.append(c);
@@ -40,7 +40,7 @@ public class Parse implements Parser {
         return result.reverse().toString();
     }
 
-    private boolean isNumber(char token) {
+    private boolean isLetter(char token) {
         return Character.isLetter(token);
     }
 
@@ -55,5 +55,14 @@ public class Parse implements Parser {
             return 3;
         } else
             return 4;
+    }
+
+    private String prepare(String formula) {
+        formula = formula.toLowerCase()
+                .replaceAll("[*^]", "&")
+                .replaceAll("[+v]", "|")
+                .replaceAll("[~-]", "!");
+
+        return formula;
     }
 }
