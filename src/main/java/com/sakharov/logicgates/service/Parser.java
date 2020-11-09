@@ -1,5 +1,7 @@
 package com.sakharov.logicgates.service;
 
+import java.util.List;
+
 public interface Parser {
-    String rpn(String formula);
+    List<String> rpn(String formula);
 }

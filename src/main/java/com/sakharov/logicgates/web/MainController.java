@@ -45,9 +45,10 @@ public class MainController {
 
         parameters.put("a", true);
         parameters.put("b", false);
-//        result = calc.calculate(formula.toLowerCase(), parameters);
+        result = calc.calculate(parser.rpn(formula), parameters);
 
-        model.addAttribute("result", parser.rpn(formula));
+        model.addAttribute("formula", formula);
+        model.addAttribute("result", result);
 
         return "result";
     }

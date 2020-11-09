@@ -3,62 +3,63 @@ package com.sakharov.logicgates.service;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 @Service
 public class Parse implements Parser {
     @Override
-    public String rpn(String formula) {
-        StringBuilder result = new StringBuilder();
-        ArrayList<Character> resultList = new ArrayList<>();
-        Stack<Character> opStack = new Stack<>();
+    public List<String> rpn(String formula) {
+        // TODO: parse word params (ab&c)
+        List<String> result = new ArrayList<>();
+        Stack<String> opStack = new Stack<>();
 
         formula = prepare(formula);
 
-        for (char token : formula.toCharArray()) {
+        for (String token : formula.split("")) {
             if (isLetter(token))
-                resultList.add(token);
-            else if (token == '(')
+                result.add(token);
+            else if (token.equals("("))
                 opStack.push(token);
-            else if (token == ')') {
-                while (opStack.peek() != '(')
-                    resultList.add(opStack.pop());
+            else if (token.equals(")")) {
+                while (!opStack.peek().equals("("))
+                    result.add(opStack.pop());
                 opStack.pop();
             } else {
                 while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token))
-                    resultList.add(opStack.pop());
+                    result.add(opStack.pop());
                 opStack.push(token);
             }
         }
 
         while (!opStack.isEmpty())
-            resultList.add(opStack.pop());
+            result.add(opStack.pop());
 
-        for (char c: resultList)
-            result.append(c);
-
-        return result.reverse().toString();
+        return result;
     }
 
-    private boolean isLetter(char token) {
-        return Character.isLetter(token);
+    private boolean isLetter(String token) {
+        return Character.isLetter(token.charAt(0));
     }
 
-    private int getPriority(char op) {
-        if (op == '(') {
-            return 0;
-        } else if (op == '|') {
-            return 1;
-        } else if (op == '&') {
-            return 2;
-        } else if (op == '!') {
-            return 3;
-        } else
-            return 4;
+    private int getPriority(String op) {
+        switch (op) {
+            case "(":
+                return 0;
+            case "|":
+                return 1;
+            case "&":
+                return 2;
+            case "!":
+                return 3;
+            default:
+                return 4;
+        }
     }
 
     private String prepare(String formula) {
         formula = formula.toLowerCase()
+                .replaceAll("\\s", "")
                 .replaceAll("[*^]", "&")
                 .replaceAll("[+v]", "|")
                 .replaceAll("[~-]", "!");
