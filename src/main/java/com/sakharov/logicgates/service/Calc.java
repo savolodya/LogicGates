@@ -35,7 +35,6 @@ public class Calc implements Calculator {
 
         result = stack.pop();
 
-        System.out.println(rpn);
         return result;
     }
 }

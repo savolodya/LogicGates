@@ -43,8 +43,8 @@ public class MainController {
         String formula = allParams.get("formula");
         boolean result;
 
-        parameters.put("a", true);
-        parameters.put("b", false);
+        parameters.put("ab", true);
+        parameters.put("c", false);
         result = calc.calculate(parser.rpn(formula), parameters);
 
         model.addAttribute("formula", formula);

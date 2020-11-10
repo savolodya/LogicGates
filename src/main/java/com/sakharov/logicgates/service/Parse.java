@@ -10,25 +10,39 @@ import java.util.Stack;
 public class Parse implements Parser {
     @Override
     public List<String> rpn(String formula) {
-        // TODO: parse word params (ab&c)
         List<String> result = new ArrayList<>();
         Stack<String> opStack = new Stack<>();
 
         formula = prepare(formula);
 
-        for (String token : formula.split("")) {
-            if (isLetter(token))
-                result.add(token);
-            else if (token.equals("("))
-                opStack.push(token);
-            else if (token.equals(")")) {
-                while (!opStack.peek().equals("("))
-                    result.add(opStack.pop());
-                opStack.pop();
+        String[] splitFormula = formula.split("");
+
+        for (int i = 0; i < splitFormula.length; i++) {
+            String token = splitFormula[i];
+            if (isLetter(token)) {
+                StringBuilder param = new StringBuilder(token);
+
+                while (i + 1 < splitFormula.length && isLetter(splitFormula[i + 1])) {
+                    param.append(splitFormula[i + 1]);
+                    i++;
+                }
+                result.add(param.toString());
             } else {
-                while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token))
-                    result.add(opStack.pop());
-                opStack.push(token);
+                switch (token) {
+                    case "(":
+                        opStack.push(token);
+                        break;
+                    case ")":
+                        while (!opStack.peek().equals("("))
+                            result.add(opStack.pop());
+                        opStack.pop();
+                        break;
+                    default:
+                        while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token))
+                            result.add(opStack.pop());
+                        opStack.push(token);
+                        break;
+                }
             }
         }
 
