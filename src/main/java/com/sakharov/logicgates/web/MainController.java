@@ -28,13 +28,9 @@ public class MainController {
 //    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-    public List<String> root() {
-        List<String> list = new ArrayList<>();
+    public boolean root() {
 
-        list.add("a");
-        list.add("b");
-
-        return list;
+        return true;
     }
 
 //    @GetMapping("/help")

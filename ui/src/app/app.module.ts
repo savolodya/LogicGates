@@ -8,7 +8,8 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LeftBarComponent } from './left-bar/left-bar.component';
-import { ContentComponent } from './content/content.component';
+import { MainComponent } from './main/main.component';
+import { HelpComponent } from './help/help.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ContentComponent } from './content/content.component';
     HeaderComponent,
     FooterComponent,
     LeftBarComponent,
-    ContentComponent
+    MainComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

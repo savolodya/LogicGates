@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-
-export class Vars {
-  constructor(
-    public name: string,
-  ) {}
-}
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +8,7 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getVars() {
-    return this.httpClient.get<Vars[]>('http://localhost:8090/');
+  getResult() {
+    return this.httpClient.get<boolean>('http://localhost:8090/');
   }
 }
