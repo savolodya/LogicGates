@@ -2,7 +2,9 @@
 <app-left-bar></app-left-bar>
 <div id="content">
   <label class="w3-text-blue">Formula</label>
-  <input class="w3-input w3-border" type="text" name="formula" placeholder="Y = A & B">
+  <label>
+    <input class="w3-input w3-border" type="text" name="formula" placeholder="Y = A & B" (input)="setInputs($event)" >
+  </label>
   <br>
   <button class="w3-btn w3-blue">Calculate</button>
 </div>

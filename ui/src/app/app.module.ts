@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +11,6 @@ import { FooterComponent } from './footer/footer.component';
 import { LeftBarComponent } from './left-bar/left-bar.component';
 import { MainComponent } from './main/main.component';
 import { HelpComponent } from './help/help.component';
-
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { HelpComponent } from './help/help.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [],
