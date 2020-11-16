@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { LeftBarComponent } from './left-bar/left-bar.component';
 import { MainComponent } from './main/main.component';
 import { HelpComponent } from './help/help.component';
 
@@ -18,7 +17,6 @@ import { HelpComponent } from './help/help.component';
     CalculatorComponent,
     HeaderComponent,
     FooterComponent,
-    LeftBarComponent,
     MainComponent,
     HelpComponent
   ],
