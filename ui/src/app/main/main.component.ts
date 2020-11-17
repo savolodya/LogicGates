@@ -34,4 +34,8 @@ export class MainComponent implements OnInit {
   changeState(input: any) {
     this.inputs.set(input, !this.inputs.get(input));
   }
+
+  calculate() {
+
+  }
 }
