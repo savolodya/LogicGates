@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   //TODO: check (compile)
-  inputs: Set <string>;
-  qwe = ["1","2"];
+  inputs: Map <string, boolean>;
+  heightLeftBar: number;
 
   constructor() {
-    this.inputs = new Set<string>();
+    this.inputs = new Map<string, boolean>();
   }
 
   ngOnInit(): void {
@@ -24,7 +24,14 @@ export class MainComponent implements OnInit {
 
     this.inputs.clear();
 
-    inputArr.forEach(input => this.inputs.add(input));
-    console.log(this.inputs);
+    inputArr ? inputArr.forEach(input => this.inputs.set(input, true)) : {};
+  }
+
+  getKeys(map){
+    return Array.from(map.keys());
+  }
+
+  changeState(input: any) {
+    this.inputs.set(input, !this.inputs.get(input));
   }
 }
