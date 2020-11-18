@@ -72,10 +72,10 @@ public class Parse implements Parser {
     }
 
     private String prepare(String formula) {
-        formula = formula.toLowerCase()
+        formula = formula
                 .replaceAll("\\s", "")
                 .replaceAll("[*^]", "&")
-                .replaceAll("[+v]", "|")
+                .replaceAll("[+]", "|")
                 .replaceAll("[~-]", "!");
 
         return formula;

@@ -8,7 +8,7 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getResult() {
-    return this.httpClient.get<boolean>('http://localhost:8090/');
+  getResult(calculator) {
+    return this.httpClient.get<boolean>('http://localhost:8090/result', calculator);
   }
 }

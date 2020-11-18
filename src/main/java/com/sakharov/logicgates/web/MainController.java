@@ -21,7 +21,7 @@ public class MainController {
 //        return true;
 //    }
 
-    @RequestMapping(value = "/result", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/result", method = RequestMethod.GET, produces = "application/json")
     public boolean result(@RequestParam Map<String,String> allParams) {
         Map <String, Boolean> parameters = new HashMap<>();
         String formula = allParams.get("formula");

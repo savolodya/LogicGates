@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClientService} from "../service/http-client.service";
+import {Calculator} from "../model/calculator.model";
 
 @Component({
   selector: 'app-main',
@@ -9,8 +11,9 @@ export class MainComponent implements OnInit {
   //TODO: check (compile)
   inputs: Map <string, boolean>;
   heightLeftBar: number;
+  calculator: Calculator;
 
-  constructor() {
+  constructor(private httpClientService:HttpClientService) {
     this.inputs = new Map<string, boolean>();
   }
 
@@ -25,6 +28,11 @@ export class MainComponent implements OnInit {
     this.inputs.clear();
 
     inputArr ? inputArr.forEach(input => this.inputs.set(input, true)) : {};
+
+    console.log(formula);
+    this.calculator.formula = formula;
+    this.calculator.parameters = this.inputs;
+    console.log(this.calculator);
   }
 
   getKeys(map){
@@ -36,6 +44,10 @@ export class MainComponent implements OnInit {
   }
 
   calculate() {
-
+    this.httpClientService.getResult(this.calculator)
+      .subscribe(
+        response => console.log(response),
+        error => console.log(error)
+      );
   }
 }
