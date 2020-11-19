@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -22,18 +23,14 @@ public class MainController {
 //    }
 
     @RequestMapping(value = "/result", method = RequestMethod.GET, produces = "application/json")
-    public boolean result(@RequestParam("formula") String formula,
-                          @RequestParam("parameters") String parameters) {
-//        Map <String, Boolean> parameters = new HashMap<>();
-//        String formula = allParams.get("formula");
-//        boolean result;
-//
-//        parameters.put("ab", true);
-//        parameters.put("c", false);
-//        result = calc.calculate(parser.rpn(formula), parameters);
+    public boolean result(@RequestParam Map<String, String> reqParam) {
+        String formula = reqParam.get("formula");
+        boolean result;
 
-        System.out.println(formula);
-        System.out.println(parameters);
-        return true;
+        reqParam.remove("formula");
+
+        result = calc.calculate(parser.rpn(formula), reqParam.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entry -> Boolean.parseBoolean(entry.getValue()))));
+
+        return result;
     }
 }

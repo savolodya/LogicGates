@@ -43,7 +43,7 @@ export class MainComponent implements OnInit {
   calculate() {
     this.httpClientService.getResult(this.formula, this.parameters)
       .subscribe(
-        response => console.log(response),
+        response => console.log(this.formula + " = " + response + ", ( " + Array.from(this.parameters) + ")"),
         error => console.log(error)
       );
   }

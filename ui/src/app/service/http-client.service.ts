@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +9,11 @@ export class HttpClientService {
   constructor(private httpClient: HttpClient) {}
 
   getResult(formula, parameters) {
-    let params = {
-      formula: formula,
-      parameters: JSON.stringify(Array.from(parameters.entries()))
-    }
+    let query = 'formula='+formula.replace(/&/g, encodeURIComponent('&'));
+    parameters.forEach((value, key) => query+='&'+key+'='+value);
 
-    console.log(JSON.stringify(params));
+    const opts = { params: new HttpParams({fromString: query}) };
 
-    return this.httpClient.get<boolean>('http://localhost:8090/result', {
-      responseType:'json', params:params
-    });
+    return this.httpClient.get<boolean>("http://localhost:8090/result", opts);
   }
 }
