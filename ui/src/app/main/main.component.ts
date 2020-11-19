@@ -9,30 +9,27 @@ import {Calculator} from "../model/calculator.model";
 })
 export class MainComponent implements OnInit {
   //TODO: check (compile)
-  inputs: Map <string, boolean>;
+  parameters: Map <string, boolean>;
+  formula: string;
   heightLeftBar: number;
   calculator: Calculator;
 
   constructor(private httpClientService:HttpClientService) {
-    this.inputs = new Map<string, boolean>();
+    this.parameters = new Map<string, boolean>();
   }
 
   ngOnInit(): void {
   }
 
   setInputs(event: any) {
-    let formula = event.target.value
+    this.formula = event.target.value;
+    let formula = this.formula
       .replace(/\s/g, "");
     let inputArr = formula.match(/(_*([a-zA-Z]+(_*[0-9])*_*)+)(\\^)?/g);
 
-    this.inputs.clear();
+    this.parameters.clear();
 
-    inputArr ? inputArr.forEach(input => this.inputs.set(input, true)) : {};
-
-    console.log(formula);
-    this.calculator.formula = formula;
-    this.calculator.parameters = this.inputs;
-    console.log(this.calculator);
+    inputArr ? inputArr.forEach(input => this.parameters.set(input, true)) : {};
   }
 
   getKeys(map){
@@ -40,11 +37,11 @@ export class MainComponent implements OnInit {
   }
 
   changeState(input: any) {
-    this.inputs.set(input, !this.inputs.get(input));
+    this.parameters.set(input, !this.parameters.get(input));
   }
 
   calculate() {
-    this.httpClientService.getResult(this.calculator)
+    this.httpClientService.getResult(this.formula, this.parameters)
       .subscribe(
         response => console.log(response),
         error => console.log(error)

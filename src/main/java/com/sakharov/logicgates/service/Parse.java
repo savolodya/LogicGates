@@ -73,7 +73,8 @@ public class Parse implements Parser {
 
     private String prepare(String formula) {
         formula = formula
-                .replaceAll("\\s", "")
+                .trim()
+//                .replaceAll("\\s", "")
                 .replaceAll("[*^]", "&")
                 .replaceAll("[+]", "|")
                 .replaceAll("[~-]", "!");

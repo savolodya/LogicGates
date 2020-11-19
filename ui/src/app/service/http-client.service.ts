@@ -8,7 +8,16 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getResult(calculator) {
-    return this.httpClient.get<boolean>('http://localhost:8090/result', calculator);
+  getResult(formula, parameters) {
+    let params = {
+      formula: formula,
+      parameters: JSON.stringify(Array.from(parameters.entries()))
+    }
+
+    console.log(JSON.stringify(params));
+
+    return this.httpClient.get<boolean>('http://localhost:8090/result', {
+      responseType:'json', params:params
+    });
   }
 }

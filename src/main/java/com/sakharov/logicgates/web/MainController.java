@@ -22,15 +22,18 @@ public class MainController {
 //    }
 
     @RequestMapping(value = "/result", method = RequestMethod.GET, produces = "application/json")
-    public boolean result(@RequestParam Map<String,String> allParams) {
-        Map <String, Boolean> parameters = new HashMap<>();
-        String formula = allParams.get("formula");
-        boolean result;
+    public boolean result(@RequestParam("formula") String formula,
+                          @RequestParam("parameters") String parameters) {
+//        Map <String, Boolean> parameters = new HashMap<>();
+//        String formula = allParams.get("formula");
+//        boolean result;
+//
+//        parameters.put("ab", true);
+//        parameters.put("c", false);
+//        result = calc.calculate(parser.rpn(formula), parameters);
 
-        parameters.put("ab", true);
-        parameters.put("c", false);
-        result = calc.calculate(parser.rpn(formula), parameters);
-
-        return result;
+        System.out.println(formula);
+        System.out.println(parameters);
+        return true;
     }
 }
