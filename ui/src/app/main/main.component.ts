@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClientService} from "../service/http-client.service";
-import {Calculator} from "../model/calculator.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-main',
@@ -12,13 +12,11 @@ export class MainComponent implements OnInit {
   parameters: Map <string, boolean>;
   formula: string;
   heightLeftBar: number;
-  calculator: Calculator;
 
-  constructor(private httpClientService:HttpClientService) {
-    this.parameters = new Map<string, boolean>();
-  }
+  constructor(private httpClientService:HttpClientService, private router: Router) {  }
 
   ngOnInit(): void {
+    this.parameters = new Map<string, boolean>();
   }
 
   setInputs(event: any) {
@@ -41,10 +39,14 @@ export class MainComponent implements OnInit {
   }
 
   calculate() {
+    let result;
+
     this.httpClientService.getResult(this.formula, this.parameters)
       .subscribe(
-        response => console.log(this.formula + " = " + response + ", ( " + Array.from(this.parameters) + ")"),
+        response => result = response,
         error => console.log(error)
       );
+
+    this.router.navigateByUrl('/result', {skipLocationChange: true});
   }
 }

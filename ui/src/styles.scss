@@ -31,5 +31,9 @@ a {
   color: white;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+#dataIO {
+  float: left;
+  width: 350px;
+  background-color: white;
+  height: 90%;
+}
