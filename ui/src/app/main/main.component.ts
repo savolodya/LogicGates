@@ -12,6 +12,7 @@ export class MainComponent implements OnInit {
   parameters: Map <string, boolean>;
   formula: string;
   heightLeftBar: number;
+  result: boolean;
 
   constructor(private httpClientService:HttpClientService, private router: Router) {  }
 
@@ -39,14 +40,14 @@ export class MainComponent implements OnInit {
   }
 
   calculate() {
-    let result;
-
     this.httpClientService.getResult(this.formula, this.parameters)
       .subscribe(
-        response => result = response,
+        response => {
+          this.router.navigate(['/result', this.formula, this.parameters, response]);
+        },
         error => console.log(error)
       );
 
-    this.router.navigateByUrl('/result', {skipLocationChange: true});
+    // this.router.navigateByUrl('/result', {skipLocationChange: true});
   }
 }
