@@ -13,14 +13,19 @@ export class MainComponent implements OnInit {
   formula: string;
   heightLeftBar: number;
   result: boolean;
+  isCalculated: boolean;
 
   constructor(private httpClientService:HttpClientService, private router: Router) {  }
 
   ngOnInit(): void {
     this.parameters = new Map<string, boolean>();
+    this.result = null;
+    this.isCalculated = false;
+    this.formula = "";
   }
 
   setInputs(event: any) {
+    this.result = null;
     this.formula = event.target.value;
     let formula = this.formula
       .replace(/\s/g, "");
@@ -31,7 +36,7 @@ export class MainComponent implements OnInit {
     inputArr ? inputArr.forEach(input => this.parameters.set(input, true)) : {};
   }
 
-  getKeys(map){
+  getKeys(map) {
     return Array.from(map.keys());
   }
 
@@ -43,11 +48,18 @@ export class MainComponent implements OnInit {
     this.httpClientService.getResult(this.formula, this.parameters)
       .subscribe(
         response => {
-          this.router.navigate(['/result', this.formula, this.parameters, response]);
+          this.result = response;
+          this.isCalculated = true;
         },
         error => console.log(error)
       );
 
     // this.router.navigateByUrl('/result', {skipLocationChange: true});
+    // this.router.navigate(['/result', this.formula, this.parameters, this.result]);
+  }
+
+  back() {
+    this.isCalculated = false;
+    this.result = null;
   }
 }
