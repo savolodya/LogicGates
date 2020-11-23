@@ -1,5 +1,6 @@
-package com.sakharov.logicgates.service;
+package com.sakharov.logicgates.service.impl;
 
+import com.sakharov.logicgates.service.CalculatorService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Map;
 import java.util.Stack;
 
 @Service
-public class Calc implements Calculator {
+public class CalculatorServiceImpl implements CalculatorService {
     @Override
     public boolean calculate(List<String> rpn, Map<String, Boolean> parameters) {
         Stack<Boolean> stack = new Stack<>();

@@ -1,5 +1,6 @@
-package com.sakharov.logicgates.service;
+package com.sakharov.logicgates.service.impl;
 
+import com.sakharov.logicgates.service.ParserService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 import java.util.Stack;
 
 @Service
-public class Parse implements Parser {
+public class ParserServiceImpl implements ParserService {
     @Override
     public List<String> rpn(String formula) {
         List<String> result = new ArrayList<>();
