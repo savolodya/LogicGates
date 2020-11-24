@@ -5,6 +5,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpClientService {
+  apiUrl = "http://localhost:8090/";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -14,6 +15,6 @@ export class HttpClientService {
 
     const opts = { params: new HttpParams({fromString: query}) };
 
-    return this.httpClient.get<boolean>("http://localhost:8090/result", opts);
+    return this.httpClient.get<boolean>(this.apiUrl + "result", opts);
   }
 }

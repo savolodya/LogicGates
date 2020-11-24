@@ -53,13 +53,14 @@ export class MainComponent implements OnInit {
         },
         error => console.log(error)
       );
-
-    // this.router.navigateByUrl('/result', {skipLocationChange: true});
-    // this.router.navigate(['/result', this.formula, this.parameters, this.result]);
   }
 
   back() {
     this.isCalculated = false;
     this.result = null;
+  }
+
+  generateTruthTable() {
+
   }
 }
