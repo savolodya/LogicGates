@@ -1,7 +1,9 @@
 package com.sakharov.logicgates.controller;
 
 import com.sakharov.logicgates.dto.ResultDataDto;
+import com.sakharov.logicgates.model.CalculatorModel;
 import com.sakharov.logicgates.service.CalculatorService;
+import com.sakharov.logicgates.service.GeneratorService;
 import com.sakharov.logicgates.service.ParserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -21,6 +25,8 @@ public class CalculatorRestController {
     private CalculatorService calc;
     @Autowired
     private ParserService parser;
+    @Autowired
+    private GeneratorService generator;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -41,16 +47,24 @@ public class CalculatorRestController {
 
     @GetMapping("/truthTable")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ResultDataDto>> getTruthTable(@RequestParam Map<String, String> reqParam) {
-        String formula = reqParam.get("formula");
-        List<String> inputs = new ArrayList<>();
+    public ResponseEntity<List<ResultDataDto>> getTruthTable(
+            @RequestBody CalculatorModel calculatorModel
+    ) {
         List<ResultDataDto> truthTable = new ArrayList<>();
+        List<String> rpn = parser.rpn(calculatorModel.getFormula());
+        List<List<Boolean>> inputsValue = generator.generate(calculatorModel.getInputs().size());
 
-        reqParam.remove("formula");
+        for (List<Boolean> value : inputsValue) {
+            Boolean result = calc.calculate(rpn,
+                    IntStream.range(0, calculatorModel.getInputs().size())
+                            .collect(
+                                    HashMap::new,
+                                    (m, j) -> m.put(calculatorModel.getInputs().get(j), value.get(j)),
+                                    Map::putAll
+                            )
+            );
 
-        for (int i = 0; i < Math.pow(2, inputs.size()); i++) {
-            ResultDataDto result = new ResultDataDto();
-
+            truthTable.add(new ResultDataDto(value, result));
         }
 
         return new ResponseEntity<>(truthTable, HttpStatus.OK);
