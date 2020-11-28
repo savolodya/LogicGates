@@ -50,6 +50,7 @@ public class CalculatorRestController {
     public ResponseEntity<List<ResultDataDto>> getTruthTable(
             @RequestBody CalculatorModel calculatorModel
     ) {
+        System.out.println(calculatorModel);
         List<ResultDataDto> truthTable = new ArrayList<>();
         List<String> rpn = parser.rpn(calculatorModel.getFormula());
         List<List<Boolean>> inputsValue = generator.generate(calculatorModel.getInputs().size());

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClientService} from "../service/http-client.service";
 import {Router} from "@angular/router";
+import {ResultData} from "../model/result-data";
 
 @Component({
   selector: 'app-main',
@@ -14,6 +15,8 @@ export class MainComponent implements OnInit {
   heightLeftBar: number;
   result: boolean;
   isCalculated: boolean;
+  isGenerated: boolean;
+  truthTable: ResultData[];
 
   constructor(private httpClientService:HttpClientService, private router: Router) {  }
 
@@ -61,6 +64,14 @@ export class MainComponent implements OnInit {
   }
 
   generateTruthTable() {
-
+    this.httpClientService.getTruthTable(this.formula, Array.from(this.parameters.keys()))
+      .subscribe(
+        response => {
+          console.log(JSON.stringify(response));
+          this.truthTable = response;
+          this.isGenerated = true;
+        },
+        error => console.log(error)
+      );
   }
 }
