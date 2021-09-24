@@ -1,4 +1,4 @@
-package com.sakharov.logicgates.service;
+package com.logicgates.service;
 
 import java.util.List;
 import java.util.Map;

@@ -1,10 +1,10 @@
-package com.sakharov.logicgates.controller;
+package com.logicgates.controller;
 
-import com.sakharov.logicgates.dto.ResultDataDto;
-import com.sakharov.logicgates.model.CalculatorModel;
-import com.sakharov.logicgates.service.CalculatorService;
-import com.sakharov.logicgates.service.GeneratorService;
-import com.sakharov.logicgates.service.ParserService;
+import com.logicgates.dto.ResultDataDto;
+import com.logicgates.model.CalculatorModel;
+import com.logicgates.service.CalculatorService;
+import com.logicgates.service.GeneratorService;
+import com.logicgates.service.ParserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

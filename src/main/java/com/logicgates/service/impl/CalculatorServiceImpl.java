@@ -1,6 +1,6 @@
-package com.sakharov.logicgates.service.impl;
+package com.logicgates.service.impl;
 
-import com.sakharov.logicgates.service.CalculatorService;
+import com.logicgates.service.CalculatorService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

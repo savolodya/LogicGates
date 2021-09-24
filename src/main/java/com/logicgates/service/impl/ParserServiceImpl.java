@@ -1,6 +1,6 @@
-package com.sakharov.logicgates.service.impl;
+package com.logicgates.service.impl;
 
-import com.sakharov.logicgates.service.ParserService;
+import com.logicgates.service.ParserService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -61,9 +61,9 @@ public class ParserServiceImpl implements ParserService {
         switch (op) {
             case "(":
                 return 0;
-            case "|":
-                return 1;
             case "&":
+                return 1;
+            case "|":
                 return 2;
             case "!":
                 return 3;

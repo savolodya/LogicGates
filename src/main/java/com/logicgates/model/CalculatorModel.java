@@ -1,4 +1,4 @@
-package com.sakharov.logicgates.dto;
+package com.logicgates.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResultDataDto {
-    List<Boolean> inputs;
-    Boolean output;
+public class CalculatorModel {
+    String formula;
+    List<String> inputs;
 }

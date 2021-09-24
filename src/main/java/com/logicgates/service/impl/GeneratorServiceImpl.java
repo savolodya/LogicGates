@@ -1,6 +1,6 @@
-package com.sakharov.logicgates.service.impl;
+package com.logicgates.service.impl;
 
-import com.sakharov.logicgates.service.GeneratorService;
+import com.logicgates.service.GeneratorService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
