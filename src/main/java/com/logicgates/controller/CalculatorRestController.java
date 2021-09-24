@@ -10,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,7 +27,9 @@ public class CalculatorRestController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public boolean result(@RequestParam Map<String, String> reqParam) {
+    public boolean result(
+            @RequestParam Map<String, String> reqParam
+    ) {
         String formula = reqParam.get("formula");
         reqParam.remove("formula");
         Map<String, Boolean> inputs = reqParam.entrySet()
@@ -45,12 +44,12 @@ public class CalculatorRestController {
         return calc.calculate(parser.rpn(formula), inputs);
     }
 
-    @GetMapping("/truthTable")
+    @PostMapping("/truthTable")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ResultDataDto>> getTruthTable(
             @RequestBody CalculatorModel calculatorModel
     ) {
-        System.out.println(calculatorModel);
+        System.out.println(calculatorModel.getFormula() + " " + calculatorModel.getInputs());
         List<ResultDataDto> truthTable = new ArrayList<>();
         List<String> rpn = parser.rpn(calculatorModel.getFormula());
         List<List<Boolean>> inputsValue = generator.generate(calculatorModel.getInputs().size());

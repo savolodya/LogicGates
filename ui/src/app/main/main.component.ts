@@ -24,6 +24,7 @@ export class MainComponent implements OnInit {
     this.parameters = new Map<string, boolean>();
     this.result = null;
     this.isCalculated = false;
+    this.isGenerated = false;
     this.formula = "";
   }
 
@@ -64,6 +65,7 @@ export class MainComponent implements OnInit {
   }
 
   generateTruthTable() {
+    // TODO: & - %26 in spring
     this.httpClientService.getTruthTable(this.formula, Array.from(this.parameters.keys()))
       .subscribe(
         response => {

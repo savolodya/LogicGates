@@ -29,9 +29,6 @@ export class HttpClientService {
       .set('formula', formula.replace(/&/g, encodeURIComponent('&')))
       .set('inputs', encodeURIComponent(inputs.toString()));
 
-    return this.httpClient.get<ResultData[]>(this.apiUrl + "result/truthTable", {
-      responseType: "json",
-      params: params
-    });
+    return this.httpClient.post<ResultData[]>(this.apiUrl + "result/truthTable", query);
   }
 }
