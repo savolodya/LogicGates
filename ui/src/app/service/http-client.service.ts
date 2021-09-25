@@ -10,6 +10,7 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient) {}
 
+  // TODO: refactor to POST
   getResult(formula, parameters) {
     let query = 'formula='+formula.replace(/&/g, encodeURIComponent('&'));
     parameters.forEach((value, key) => query+='&'+key+'='+value);
@@ -24,10 +25,6 @@ export class HttpClientService {
       formula: formula.replace(/&/g, encodeURIComponent('&')),
       inputs: inputs
     }
-
-    let params = new HttpParams()
-      .set('formula', formula.replace(/&/g, encodeURIComponent('&')))
-      .set('inputs', encodeURIComponent(inputs.toString()));
 
     return this.httpClient.post<ResultData[]>(this.apiUrl + "result/truthTable", query);
   }

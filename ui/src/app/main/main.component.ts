@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClientService} from "../service/http-client.service";
-import {Router} from "@angular/router";
 import {ResultData} from "../model/result-data";
 
 @Component({
@@ -9,16 +8,14 @@ import {ResultData} from "../model/result-data";
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  //TODO: check (compile)
   parameters: Map <string, boolean>;
   formula: string;
-  heightLeftBar: number;
   result: boolean;
   isCalculated: boolean;
   isGenerated: boolean;
   truthTable: ResultData[];
 
-  constructor(private httpClientService:HttpClientService, private router: Router) {  }
+  constructor(private httpClientService:HttpClientService) {  }
 
   ngOnInit(): void {
     this.parameters = new Map<string, boolean>();
@@ -61,6 +58,7 @@ export class MainComponent implements OnInit {
 
   back() {
     this.isCalculated = false;
+    this.isGenerated = false;
     this.result = null;
   }
 
