@@ -12,4 +12,5 @@ import java.util.List;
 public class CalculatorModel {
     String formula;
     List<String> inputs;
+    List<Boolean> values;
 }

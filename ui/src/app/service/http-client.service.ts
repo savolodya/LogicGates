@@ -1,31 +1,34 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ResultData} from "../model/result-data";
+import {CalculatorDto} from "../dto/calculator-dto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClientService {
   apiUrl = "http://localhost:8090/";
+  calculatorDto: CalculatorDto;
 
   constructor(private httpClient: HttpClient) {}
 
-  // TODO: refactor to POST
-  getResult(formula, parameters) {
-    let query = 'formula='+formula.replace(/&/g, encodeURIComponent('&'));
-    parameters.forEach((value, key) => query+='&'+key+'='+value);
+  getResult(formula: string, parameters: Map <string, boolean>) {
+    this.calculatorDto = {
+      formula: formula,
+      inputs: Array.from(parameters.keys()),
+      values: Array.from(parameters.values())
+    };
 
-    const opts = { params: new HttpParams({fromString: query}) };
-
-    return this.httpClient.get<boolean>(this.apiUrl + "result", opts);
+    return this.httpClient.post<boolean>(this.apiUrl + "result", this.calculatorDto);
   }
 
   getTruthTable(formula: string, inputs: string[]) {
-    let query = {
-      formula: formula.replace(/&/g, encodeURIComponent('&')),
-      inputs: inputs
-    }
+    this.calculatorDto = {
+      formula: formula,
+      inputs: inputs,
+      values: null
+    };
 
-    return this.httpClient.post<ResultData[]>(this.apiUrl + "result/truthTable", query);
+    return this.httpClient.post<ResultData[]>(this.apiUrl + "result/truthTable", this.calculatorDto);
   }
 }

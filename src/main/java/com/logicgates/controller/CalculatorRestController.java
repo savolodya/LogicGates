@@ -25,23 +25,19 @@ public class CalculatorRestController {
     @Autowired
     private GeneratorService generator;
 
-    @GetMapping
+    @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public boolean result(
-            @RequestParam Map<String, String> reqParam
+            @RequestBody CalculatorModel calculatorModel
     ) {
-        String formula = reqParam.get("formula");
-        reqParam.remove("formula");
-        Map<String, Boolean> inputs = reqParam.entrySet()
-                .stream()
+        Map<String, Boolean> inputs = IntStream.range(0, calculatorModel.getInputs().size())
                 .collect(
-                        Collectors.toMap(
-                                Map.Entry::getKey,
-                                entry -> Boolean.parseBoolean(entry.getValue())
-                        )
+                        HashMap::new,
+                        (m, i) -> m.put(calculatorModel.getInputs().get(i), calculatorModel.getValues().get(i)),
+                        Map::putAll
                 );
 
-        return calc.calculate(parser.rpn(formula), inputs);
+        return calc.calculate(parser.rpn(calculatorModel.getFormula()), inputs);
     }
 
     @PostMapping("/truthTable")
@@ -49,7 +45,6 @@ public class CalculatorRestController {
     public ResponseEntity<List<ResultDataDto>> getTruthTable(
             @RequestBody CalculatorModel calculatorModel
     ) {
-        System.out.println(calculatorModel.getFormula() + " " + calculatorModel.getInputs());
         List<ResultDataDto> truthTable = new ArrayList<>();
         List<String> rpn = parser.rpn(calculatorModel.getFormula());
         List<List<Boolean>> inputsValue = generator.generate(calculatorModel.getInputs().size());

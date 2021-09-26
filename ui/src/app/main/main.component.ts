@@ -63,11 +63,9 @@ export class MainComponent implements OnInit {
   }
 
   generateTruthTable() {
-    // TODO: & - %26 in spring
     this.httpClientService.getTruthTable(this.formula, Array.from(this.parameters.keys()))
       .subscribe(
         response => {
-          console.log(JSON.stringify(response));
           this.truthTable = response;
           this.isGenerated = true;
         },
