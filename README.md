@@ -20,7 +20,7 @@ It can produce a normal result in the form of a variable **Y** (on the left bar)
     <img src="https://github.com/savolodya/LogicGates/blob/main/readme_assets/outputs.png" alt="Outputs">
 </p>
 
-##Project setup
+## Project setup
 Navigate to where you want your project to be contained.
 ```bash
 git clone https://github.com/savolodya/LogicGates.git
@@ -32,5 +32,5 @@ cd ../
 mvnw spring-boot:run    # Build and run Spring Boot Backend
 ```
 
-##Future scope
+## Future scope
 - Add drawing logic gates
