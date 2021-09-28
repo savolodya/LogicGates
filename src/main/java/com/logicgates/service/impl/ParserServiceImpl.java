@@ -75,7 +75,6 @@ public class ParserServiceImpl implements ParserService {
     private String prepare(String formula) {
         formula = formula
                 .trim()
-//                .replaceAll("\\s", "")
                 .replaceAll("[*^]", "&")
                 .replaceAll("[+]", "|")
                 .replaceAll("[~-]", "!");
