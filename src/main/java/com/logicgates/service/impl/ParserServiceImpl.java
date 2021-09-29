@@ -1,12 +1,15 @@
 package com.logicgates.service.impl;
 
 import com.logicgates.service.ParserService;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of service for parsing formula.
+ * Paring method RPN (Reverse Polish Notation)
+ */
 @Service
 public class ParserServiceImpl implements ParserService {
     @Override
@@ -34,21 +37,27 @@ public class ParserServiceImpl implements ParserService {
                         opStack.push(token);
                         break;
                     case ")":
-                        while (!opStack.peek().equals("("))
+                        while (!opStack.peek().equals("(")) {
                             result.add(opStack.pop());
+                        }
                         opStack.pop();
                         break;
                     default:
-                        while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token))
+                        while (
+                                !opStack.isEmpty()
+                                        && getPriority(opStack.peek()) >= getPriority(token)
+                        ) {
                             result.add(opStack.pop());
+                        }
                         opStack.push(token);
                         break;
                 }
             }
         }
 
-        while (!opStack.isEmpty())
+        while (!opStack.isEmpty()) {
             result.add(opStack.pop());
+        }
 
         return result;
     }

@@ -1,12 +1,14 @@
 package com.logicgates.service.impl;
 
 import com.logicgates.service.GeneratorService;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
+import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of service for generating inputs for truth table.
+ */
 @Service
 public class GeneratorServiceImpl implements GeneratorService {
     @Override
@@ -34,8 +36,9 @@ public class GeneratorServiceImpl implements GeneratorService {
         String binString = Integer.toBinaryString(number);
         List<Boolean> binary = new ArrayList<>();
 
-        for (String bin: ("0".repeat(length-binString.length()) + binString).split(""))
+        for (String bin : ("0".repeat(length - binString.length()) + binString).split("")) {
             binary.add(bin.equals("1"));
+        }
 
         return binary.get(position);
     }

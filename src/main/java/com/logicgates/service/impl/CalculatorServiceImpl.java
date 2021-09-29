@@ -1,12 +1,14 @@
 package com.logicgates.service.impl;
 
 import com.logicgates.service.CalculatorService;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import org.springframework.stereotype.Service;
 
+/**
+ * Implementation ofservice for calculation process.
+ */
 @Service
 public class CalculatorServiceImpl implements CalculatorService {
     @Override
@@ -14,24 +16,27 @@ public class CalculatorServiceImpl implements CalculatorService {
         Stack<Boolean> stack = new Stack<>();
         boolean result;
 
-        for (String s: rpn) {
-            if (s.matches("[&|]")){
+        for (String s : rpn) {
+            if (s.matches("[&|]")) {
                 boolean a = stack.pop();
                 boolean b = stack.pop();
 
                 switch (s) {
                     case "&":
-                        stack.push(a&b);
+                        stack.push(a & b);
                         break;
                     case "|":
-                        stack.push(a|b);
+                        stack.push(a | b);
+                        break;
+                    default:
                         break;
                 }
-            } else if(s.matches("[!]")) {
+            } else if (s.matches("[!]")) {
                 boolean a = stack.pop();
                 stack.push(!a);
-            } else
+            } else {
                 stack.push(parameters.get(s));
+            }
         }
 
         result = stack.pop();
