@@ -1,4 +1,6 @@
-# Logic Gates Simulator
+<h1 align="center">Logic Gates Simulator</h1>
+
+[![codecov](https://codecov.io/gh/savolodya/LogicGates/branch/main/graph/badge.svg?token=UDGTX3C4G3)](https://codecov.io/gh/savolodya/LogicGates)
 
 ## Description
 Logic Gates Simulator it is a simple logic calculator with intuitive web user interface which was implemented by Java Spring Boot and Angular. Calculator works only with logic functions like:
