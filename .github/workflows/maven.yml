@@ -23,6 +23,6 @@ jobs:
       run: mvn -B clean verify
 
     - name: Test Coverage
-      run: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v2
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
