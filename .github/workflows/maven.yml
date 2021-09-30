@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Build and test
 
 on:
   push:
@@ -19,5 +19,10 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
         cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Maven Verify
+      run: mvn -B clean verify
+
+    - name: Test Coverage
+      run: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
