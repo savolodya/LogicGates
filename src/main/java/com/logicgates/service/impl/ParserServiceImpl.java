@@ -26,31 +26,28 @@ public class ParserServiceImpl implements ParserService {
             if (isLetter(token)) {
                 StringBuilder param = new StringBuilder(token);
 
-                while (i + 1 < splitFormula.length && isLetter(splitFormula[i + 1])) {
+                while (i + 1 < splitFormula.length
+                        && isLetter(splitFormula[i + 1])) {
                     param.append(splitFormula[i + 1]);
                     i++;
                 }
                 result.add(param.toString());
             } else {
                 switch (token) {
-                    case "(":
-                        opStack.push(token);
-                        break;
-                    case ")":
+                    case "(" -> opStack.push(token);
+                    case ")" -> {
                         while (!opStack.peek().equals("(")) {
                             result.add(opStack.pop());
                         }
                         opStack.pop();
-                        break;
-                    default:
-                        while (
-                                !opStack.isEmpty()
-                                        && getPriority(opStack.peek()) >= getPriority(token)
-                        ) {
+                    }
+                    default -> {
+                        while (!opStack.isEmpty()
+                                && getPriority(opStack.peek()) >= getPriority(token)) {
                             result.add(opStack.pop());
                         }
                         opStack.push(token);
-                        break;
+                    }
                 }
             }
         }
@@ -58,6 +55,8 @@ public class ParserServiceImpl implements ParserService {
         while (!opStack.isEmpty()) {
             result.add(opStack.pop());
         }
+
+        System.out.println(result);
 
         return result;
     }
@@ -67,18 +66,13 @@ public class ParserServiceImpl implements ParserService {
     }
 
     private int getPriority(String op) {
-        switch (op) {
-            case "(":
-                return 0;
-            case "&":
-                return 1;
-            case "|":
-                return 2;
-            case "!":
-                return 3;
-            default:
-                return 4;
-        }
+        return switch (op) {
+            case "(" -> 0;
+            case "&" -> 1;
+            case "|" -> 2;
+            case "!" -> 3;
+            default -> 4;
+        };
     }
 
     private String prepare(String formula) {

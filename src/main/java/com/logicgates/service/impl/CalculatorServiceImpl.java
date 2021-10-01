@@ -7,7 +7,7 @@ import java.util.Stack;
 import org.springframework.stereotype.Service;
 
 /**
- * Implementation ofservice for calculation process.
+ * Implementation of service for calculation process.
  */
 @Service
 public class CalculatorServiceImpl implements CalculatorService {

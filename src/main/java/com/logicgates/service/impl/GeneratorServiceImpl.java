@@ -32,7 +32,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         return inputsList;
     }
 
-    boolean getValueByPosition(int number, int position, int length) {
+    private boolean getValueByPosition(int number, int position, int length) {
         String binString = Integer.toBinaryString(number);
         List<Boolean> binary = new ArrayList<>();
 

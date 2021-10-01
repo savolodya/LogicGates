@@ -58,10 +58,8 @@ public class CalculatorRestController {
                 );
 
         return new ResponseEntity<>(
-                calc.calculate(
-                        parser.rpn(calculatorModel.getFormula()),
-                        inputs
-                ),
+                calc.calculate(parser.rpn(calculatorModel.getFormula()),
+                        inputs),
                 HttpStatus.OK
         );
     }

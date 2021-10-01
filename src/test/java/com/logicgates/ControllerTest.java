@@ -12,7 +12,7 @@ public class ControllerTest {
     private CalculatorRestController calculatorRestController;
 
     @Test
-    public void contextLoads() throws Exception {
+    public void contextLoads() {
         assertThat(calculatorRestController).isNotNull();
     }
 }

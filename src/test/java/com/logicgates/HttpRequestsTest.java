@@ -9,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
+import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -20,14 +20,31 @@ public class HttpRequestsTest {
     private MockMvc mockMvc;
 
     @Test
-    public void shouldReturnTrue() throws Exception {
-        CalculatorModel calculatorModel = new CalculatorModel("a|b", new ArrayList<>(){{add("a"); add("b");}}, new ArrayList<>(){{add(true); add(true);}});
+    public void requestOnResultShouldBeOK() throws Exception {
+        List<String> inputs = new ArrayList<>();
+        List<Boolean> values = new ArrayList<>();
+        inputs.add("a");
+        values.add(true);
+
+        CalculatorModel calculatorModel = new CalculatorModel("a", inputs, values);
 
         this.mockMvc.perform(post("/result")
                         .content(asJsonString(calculatorModel))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string("true"));
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void requestOnTruthTableShouldBeOK() throws Exception {
+        List<String> inputs = new ArrayList<>();
+        inputs.add("a");
+
+        CalculatorModel calculatorModel = new CalculatorModel("a", inputs, null);
+
+        this.mockMvc.perform(post("/result/truthTable")
+                        .content(asJsonString(calculatorModel))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     public static String asJsonString(final Object obj) {
