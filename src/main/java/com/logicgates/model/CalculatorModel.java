@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CalculatorModel {
-    String formula;
-    List<String> inputs;
-    List<Boolean> values;
+    private String formula;
+    private List<String> inputs;
+    private List<Boolean> values;
 }
