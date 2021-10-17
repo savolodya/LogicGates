@@ -2,12 +2,12 @@ package com.logicgates.dto;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * Model for transfer resulting data to user interface.
  */
-@Data
+@Getter
 @AllArgsConstructor
 public class ResultDataDto {
     private List<Boolean> inputs;

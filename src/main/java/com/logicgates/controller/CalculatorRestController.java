@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,12 +28,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/result")
+@AllArgsConstructor
 public class CalculatorRestController {
-    @Autowired
     private CalculatorService calc;
-    @Autowired
     private ParserService parser;
-    @Autowired
     private GeneratorService generator;
 
     /**

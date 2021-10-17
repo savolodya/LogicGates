@@ -56,8 +56,6 @@ public class ParserServiceImpl implements ParserService {
             result.add(opStack.pop());
         }
 
-        System.out.println(result);
-
         return result;
     }
 

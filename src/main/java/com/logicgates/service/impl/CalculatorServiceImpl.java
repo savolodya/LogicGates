@@ -22,14 +22,10 @@ public class CalculatorServiceImpl implements CalculatorService {
                 boolean b = stack.pop();
 
                 switch (s) {
-                    case "&":
-                        stack.push(a & b);
-                        break;
-                    case "|":
-                        stack.push(a | b);
-                        break;
-                    default:
-                        break;
+                    case "&" -> stack.push(a & b);
+                    case "|" -> stack.push(a | b);
+                    default -> {
+                    }
                 }
             } else if (s.matches("[!]")) {
                 boolean a = stack.pop();
