@@ -38,7 +38,7 @@ public class CalculatorRestController {
      * Method for receiving POST request from user interface on address /result.
      * Produce result of a calculation.
      *
-     * @param calculatorModel - formula and inputs.
+     * @param calculatorModel formula and inputs.
      * @return result of calculation.
      */
     @PostMapping
@@ -67,7 +67,7 @@ public class CalculatorRestController {
      * Method for receiving POST request from user interface on address /result/truthTable.
      * Produce truth table on produces on the basis of the formula and the number of inputs.
      *
-     * @param calculatorModel - formula and inputs.
+     * @param calculatorModel formula and inputs.
      * @return resulting truth table.
      */
     @PostMapping("/truthTable")

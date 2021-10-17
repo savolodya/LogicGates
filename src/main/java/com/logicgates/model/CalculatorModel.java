@@ -4,7 +4,6 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 /**
  * Model for receiving data from user interface.
  */

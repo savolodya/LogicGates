@@ -8,10 +8,16 @@ import org.springframework.stereotype.Service;
 
 /**
  * Implementation of service for parsing formula.
- * Paring method RPN (Reverse Polish Notation)
+ * Parsing method RPN (Reverse Polish Notation)
  */
 @Service
 public class ParserServiceImpl implements ParserService {
+    /**
+     * Method which converts human-readable formula to RPN form.
+     *
+     * @param formula calculation formula.
+     * @return formula in the RPN form.
+     */
     @Override
     public List<String> rpn(String formula) {
         List<String> result = new ArrayList<>();
@@ -59,10 +65,22 @@ public class ParserServiceImpl implements ParserService {
         return result;
     }
 
+    /**
+     * Method for checking if character from a formula is a letter.
+     *
+     * @param token character from formula.
+     * @return result of check if token is a letter.
+     */
     private boolean isLetter(String token) {
         return Character.isLetter(token.charAt(0));
     }
 
+    /**
+     * Method for giving priority of operator in the formula.
+     *
+     * @param op operator.
+     * @return priority of operator.
+     */
     private int getPriority(String op) {
         return switch (op) {
             case "(" -> 0;
@@ -73,6 +91,12 @@ public class ParserServiceImpl implements ParserService {
         };
     }
 
+    /**
+     * Method which replace all possible representations of operators to one concrete operator.
+     *
+     * @param formula calculation formula.
+     * @return prepared calculation formula.
+     */
     private String prepare(String formula) {
         formula = formula
                 .trim()

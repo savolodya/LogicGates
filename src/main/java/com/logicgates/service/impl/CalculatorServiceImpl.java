@@ -11,6 +11,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CalculatorServiceImpl implements CalculatorService {
+    /**
+     * Method for calculate result of a formula in RPN representation with given parameters.
+     *
+     * @param rpn RPN representation of formula.
+     * @param parameters values of parameters in formula.
+     * @return result of calculation.
+     */
     @Override
     public boolean calculate(List<String> rpn, Map<String, Boolean> parameters) {
         Stack<Boolean> stack = new Stack<>();
